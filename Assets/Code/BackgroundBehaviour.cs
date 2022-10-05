@@ -19,4 +19,9 @@ public class BackgroundBehaviour : MonoBehaviour
     {
         pb.HasLanded = true;
     }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        pb.HasLanded = false;
+    }
 }

@@ -10,7 +10,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     public float MoveSpeed;
     float moveHorizontal;
-    float moveVertical;
 
     public bool HasLanded;
 
@@ -21,29 +20,27 @@ public class PlayerBehaviour : MonoBehaviour
         HasLanded = true;
     }
 
-    void FixedUpdate ()
+    void Update ()
     {
         //check if moving
         moveHorizontal = Input.GetAxisRaw("Horizontal");
-        moveVertical = Input.GetAxisRaw("Vertical");
 
         if (moveHorizontal < 0f || moveHorizontal > 0f)
         {
             //move horizontally
             rb2D.AddForce(new Vector2(moveHorizontal * MoveSpeed, 0f));
         }
-        
-        if (HasLanded && Input.GetKeyDown(KeyCode.W))
+
+        if (HasLanded && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
         {
             //jump
             rb2D.AddForce(jumpForce);
             HasLanded = false;
         }
-        
-        if (moveVertical < 0f)
-        {
-            //fall through platforms
-        }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("Collision Detected");
+    }
 }
