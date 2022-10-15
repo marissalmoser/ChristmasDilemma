@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Cabinet
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,12 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 3955176993
+    locked: 0
+  - name: BackgroundActiveState
+    uniqueID: 3143835471
+    locked: 0
+  - name: Presents
+    uniqueID: 1067059049
     locked: 0
   - name: Forground
     uniqueID: 2951318691
