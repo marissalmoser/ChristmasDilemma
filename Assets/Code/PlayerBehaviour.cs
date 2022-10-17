@@ -28,7 +28,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (moveHorizontal < 0f || moveHorizontal > 0f)
         {
             //move horizontally
-            rb2D.AddForce(new Vector2(moveHorizontal * MoveSpeed, 0f));
+            //Debug.Log(moveHorizontal);
+            rb2D.AddForce(new Vector2(moveHorizontal * MoveSpeed * Time.deltaTime, 0f));
         }
 
         if (HasLanded && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
@@ -36,6 +37,19 @@ public class PlayerBehaviour : MonoBehaviour
             //jump
             rb2D.AddForce(jumpForce);
             HasLanded = false;
+        }
+
+        if(rb2D.velocity.y < -1)
+        {
+
+            rb2D.gravityScale = 10;
+            //Debug.Log(rb2D.velocity.y);
+        }
+
+        if(rb2D.velocity.y == 0)
+        {
+            rb2D.gravityScale = 1;
+            //Debug.Log(rb2D.velocity.y);
         }
     }
 

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameBehaviour : MonoBehaviour
 {
+    public float Luck;
+
     void Start()
     {
         
@@ -20,5 +22,15 @@ public class GameBehaviour : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+    }
+
+    public void PresentFound()
+    {
+        //random number
+        Luck = Random.Range(1 , 5);
+
+        //if number is whatever, play animation
+
+        //call noise meter increase function
     }
 }
