@@ -5,11 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class GameBehaviour : MonoBehaviour
 {
-    public float Luck;
+    public int Luck;
+    public int MaxLuck;
+
+    public GameObject Player;
+    PlayerBehaviour Pb;
+    Animator Anim;
 
     void Start()
     {
-        
+        //Accessing the player and its components
+        GameObject Player = GameObject.Find("Player");
+        Pb = Player.GetComponent<PlayerBehaviour>();
+        Anim = Player.GetComponent<Animator>();
     }
 
     void Update()
@@ -24,13 +32,21 @@ public class GameBehaviour : MonoBehaviour
         }
     }
 
-    public void PresentFound()
+    public void PresentCheck()
     {
-        //random number
-        Luck = Random.Range(1 , 5);
+        //random number to establish Luck
+        Luck = Random.Range(1, MaxLuck);
 
-        //if number is whatever, play animation
-
-        //call noise meter increase function
+        if(Luck > 1)
+        {
+            PresentFound();
+        }
     }
+
+    void PresentFound()
+    {
+        Anim.SetTrigger("Spin");
+        //add points
+    }
+
 }

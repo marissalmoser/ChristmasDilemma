@@ -7,6 +7,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Vector2 jumpForce = new Vector2();
 
     Rigidbody2D rb2D;
+    Animator Anim;
 
     public float MoveSpeed;
     float moveHorizontal;
@@ -16,11 +17,12 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        Anim = GetComponent<Animator>();
 
         HasLanded = true;
     }
 
-    void Update ()
+    void Update()
     {
         //check if moving
         moveHorizontal = Input.GetAxisRaw("Horizontal");
@@ -28,8 +30,13 @@ public class PlayerBehaviour : MonoBehaviour
         if (moveHorizontal < 0f || moveHorizontal > 0f)
         {
             //move horizontally
-            //Debug.Log(moveHorizontal);
             rb2D.AddForce(new Vector2(moveHorizontal * MoveSpeed * Time.deltaTime, 0f));
+            Anim.SetBool("Walk",true);
+        }
+
+        if (moveHorizontal == 0)
+        {
+            Anim.SetBool("Walk", false);
         }
 
         if (HasLanded && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
@@ -39,22 +46,15 @@ public class PlayerBehaviour : MonoBehaviour
             HasLanded = false;
         }
 
-        if(rb2D.velocity.y < -1)
+        //Alter gravity when falling
+        if(rb2D.velocity.y < -0)
         {
-
             rb2D.gravityScale = 10;
-            //Debug.Log(rb2D.velocity.y);
         }
 
         if(rb2D.velocity.y == 0)
         {
             rb2D.gravityScale = 1;
-            //Debug.Log(rb2D.velocity.y);
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        print("Collision Detected");
     }
 }

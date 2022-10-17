@@ -6,6 +6,7 @@ public class InvestigateCabinet : MonoBehaviour
 {
     SpriteRenderer sr;
     public bool Interact;
+    public bool HasInvestigated;
 
     GameBehaviour Gb;
 
@@ -17,6 +18,8 @@ public class InvestigateCabinet : MonoBehaviour
         //getting the player behaviour script
         GameObject GameObject = GameObject.Find("GameObject");
         Gb = GameObject.GetComponent<GameBehaviour>();
+
+        HasInvestigated = false;
     }
 
     //If player is by the object and E is pressed
@@ -26,7 +29,11 @@ public class InvestigateCabinet : MonoBehaviour
         {
             sr.enabled = !sr.enabled;
 
-            Gb.PresentFound();
+            if (HasInvestigated == false)
+            {
+                Gb.PresentCheck();
+                HasInvestigated = true;
+            }
         }
     }
 
@@ -39,5 +46,6 @@ public class InvestigateCabinet : MonoBehaviour
     void OnTriggerExit2D(Collider2D target)
     {
         Interact = false;
+        HasInvestigated = false;
     }
 }
