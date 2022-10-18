@@ -11,6 +11,7 @@ public class GameBehaviour : MonoBehaviour
     public GameObject Player;
     PlayerBehaviour Pb;
     Animator Anim;
+    PresentMeterBehaviour Pmb;
 
     void Start()
     {
@@ -18,6 +19,11 @@ public class GameBehaviour : MonoBehaviour
         GameObject Player = GameObject.Find("Player");
         Pb = Player.GetComponent<PlayerBehaviour>();
         Anim = Player.GetComponent<Animator>();
+
+        //Getting present meter script
+        GameObject PresentMeter = GameObject.Find("PresentFill");
+        Pmb = PresentMeter.GetComponent<PresentMeterBehaviour>();
+        Pmb.PresentsFound = 0;
     }
 
     void Update()
@@ -46,7 +52,7 @@ public class GameBehaviour : MonoBehaviour
     void PresentFound()
     {
         Anim.SetTrigger("Spin");
-        //add points
+        Pmb.PresentInc();
     }
 
 }
