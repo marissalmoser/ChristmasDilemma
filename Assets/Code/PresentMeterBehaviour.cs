@@ -7,16 +7,17 @@ public class PresentMeterBehaviour : MonoBehaviour
 {
     public Slider PresentMeter;
     public int PresentsFound;
+    public int MaxPresents;
 
     private void Start()
     {
         PresentMeter = GetComponent<Slider>();
     }
 
-    public void SetMaxPresents(int maxPresents)
+    public void SetMaxPresents(int MaxPresents)
     {
-        PresentMeter.value = maxPresents;
-        PresentMeter.value = maxPresents;
+        PresentMeter.value = MaxPresents;
+        PresentMeter.value = MaxPresents;
     }
 
     //Credit to Dani Krossing's YouTube ^

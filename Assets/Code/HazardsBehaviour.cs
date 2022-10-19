@@ -2,38 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvestigateCabinet : MonoBehaviour
+public class HazardsBehaviour : MonoBehaviour
 {
-    SpriteRenderer sr;
     public bool Interact;
-    public bool HasInvestigated;
 
     GameBehaviour Gb;
+    HazardMeterBehaviour Hmb;
 
     private void Start()
     {
-        //getting sprite renderer component
-        sr = gameObject.GetComponent<SpriteRenderer>();
-
         //getting the player behaviour script
         GameObject GameObject = GameObject.Find("GameObject");
         Gb = GameObject.GetComponent<GameBehaviour>();
 
-        HasInvestigated = false;
+        GameObject HazardMeter = GameObject.Find("HazardFill");
+        Hmb = HazardMeter.GetComponent<HazardMeterBehaviour>();
     }
 
-    //If player is by the object and E is pressed
+    //Investigate: If player is by the object and E is pressed
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && Interact == true)
         {
-            sr.enabled = !sr.enabled;
-
-            if (HasInvestigated == false)
-            {
-                Gb.PresentCheck();
-                HasInvestigated = true;
-            }
+            Destroy(gameObject);
+            Hmb.HazardInc();
+            //play sound
         }
     }
 
@@ -46,6 +39,5 @@ public class InvestigateCabinet : MonoBehaviour
     void OnTriggerExit2D(Collider2D target)
     {
         Interact = false;
-        HasInvestigated = false;
     }
 }

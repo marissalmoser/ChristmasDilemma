@@ -12,6 +12,9 @@ public class GameBehaviour : MonoBehaviour
     PlayerBehaviour Pb;
     Animator Anim;
     PresentMeterBehaviour Pmb;
+    HazardMeterBehaviour Hmb;
+
+
 
     void Start()
     {
@@ -24,6 +27,11 @@ public class GameBehaviour : MonoBehaviour
         GameObject PresentMeter = GameObject.Find("PresentFill");
         Pmb = PresentMeter.GetComponent<PresentMeterBehaviour>();
         Pmb.PresentsFound = 0;
+
+        //Getting hazard meter script
+        GameObject HazardMeter = GameObject.Find("HazardFill");
+        Hmb = HazardMeter.GetComponent<HazardMeterBehaviour>();
+        Hmb.HazardsFound = 0;
     }
 
     void Update()
@@ -35,6 +43,16 @@ public class GameBehaviour : MonoBehaviour
         else if (Input.GetKey(KeyCode.R))
         {
             SceneManager.LoadScene(0);
+        }
+
+        if (Pmb.PresentsFound == Pmb.MaxPresents)
+        {
+            //WIN
+        }
+
+        if (Hmb.HazardsFound == Hmb.MaxHazards)
+        {
+            //LOSE
         }
     }
 
@@ -53,6 +71,7 @@ public class GameBehaviour : MonoBehaviour
     {
         Anim.SetTrigger("Spin");
         Pmb.PresentInc();
+        //play sound
     }
 
 }
