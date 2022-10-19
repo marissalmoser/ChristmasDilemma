@@ -16,7 +16,7 @@ public class HazardMeterBehaviour : MonoBehaviour
 
     public void SetMaxPresents(int MaxHazards)
     {
-        HazardMeter.value = MaxHazards;
+        HazardMeter.maxValue = MaxHazards;
         HazardMeter.value = MaxHazards;
     }
 

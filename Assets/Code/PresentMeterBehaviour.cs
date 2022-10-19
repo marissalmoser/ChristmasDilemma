@@ -16,7 +16,7 @@ public class PresentMeterBehaviour : MonoBehaviour
 
     public void SetMaxPresents(int MaxPresents)
     {
-        PresentMeter.value = MaxPresents;
+        PresentMeter.maxValue = MaxPresents;
         PresentMeter.value = MaxPresents;
     }
 

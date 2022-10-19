@@ -14,7 +14,8 @@ public class GameBehaviour : MonoBehaviour
     PresentMeterBehaviour Pmb;
     HazardMeterBehaviour Hmb;
 
-
+    public GameObject WinText;
+    public GameObject LoseText;
 
     void Start()
     {
@@ -27,11 +28,13 @@ public class GameBehaviour : MonoBehaviour
         GameObject PresentMeter = GameObject.Find("PresentFill");
         Pmb = PresentMeter.GetComponent<PresentMeterBehaviour>();
         Pmb.PresentsFound = 0;
+        Pmb.MaxPresents = 5;
 
         //Getting hazard meter script
         GameObject HazardMeter = GameObject.Find("HazardFill");
         Hmb = HazardMeter.GetComponent<HazardMeterBehaviour>();
         Hmb.HazardsFound = 0;
+        Hmb.MaxHazards = 8;
     }
 
     void Update()
@@ -45,14 +48,15 @@ public class GameBehaviour : MonoBehaviour
             SceneManager.LoadScene(0);
         }
 
-        if (Pmb.PresentsFound == Pmb.MaxPresents)
+        //winning and losing
+        if (Pmb.PresentMeter.value == Pmb.PresentMeter.maxValue)
         {
-            //WIN
+            WinText.SetActive(true);
         }
 
-        if (Hmb.HazardsFound == Hmb.MaxHazards)
+        if (Hmb.HazardMeter.value == Hmb.HazardMeter.maxValue)
         {
-            //LOSE
+            LoseText.SetActive(true);
         }
     }
 
@@ -65,9 +69,11 @@ public class GameBehaviour : MonoBehaviour
         {
             PresentFound();
         }
+
+        //destroy investigating script
     }
 
-    void PresentFound()
+    public void PresentFound()
     {
         Anim.SetTrigger("Spin");
         Pmb.PresentInc();

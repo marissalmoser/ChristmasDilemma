@@ -49,7 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
         //Alter gravity when falling
         if(rb2D.velocity.y < -0)
         {
-            rb2D.gravityScale = 10;
+            rb2D.gravityScale = 15;
         }
 
         if(rb2D.velocity.y == 0)
