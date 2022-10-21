@@ -9,6 +9,8 @@ public class HazardMeterBehaviour : MonoBehaviour
     public int HazardsFound;
     public int MaxHazards;
 
+    public bool MnC;
+
     private void Start()
     {
         HazardMeter = GetComponent<Slider>();
@@ -24,7 +26,16 @@ public class HazardMeterBehaviour : MonoBehaviour
 
     public void HazardInc()
     {
-        HazardsFound++;
-        HazardMeter.value = HazardsFound;
+        if(MnC == false)
+        {
+            HazardsFound++;
+            HazardMeter.value = HazardsFound;
+            MnC = false;
+        }
+
+        if(MnC == true)
+        {
+            MnC = false;
+        }
     }
 }
