@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HazardsBehaviour : MonoBehaviour
 {
-    public bool Interact;
+    public bool interact;
 
     GameBehaviour Gb;
     HazardMeterBehaviour Hmb;
@@ -22,7 +22,7 @@ public class HazardsBehaviour : MonoBehaviour
     //Investigate: If player is by the object and E is pressed
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Interact == true)
+        if (Input.GetKeyDown(KeyCode.Space) && interact == true)
         {
             Destroy(gameObject);
             Hmb.HazardInc();
@@ -33,11 +33,11 @@ public class HazardsBehaviour : MonoBehaviour
     //check if player is by the object
     void OnTriggerEnter2D(Collider2D target)
     {
-        Interact = true;
+        interact = true;
     }
 
     void OnTriggerExit2D(Collider2D target)
     {
-        Interact = false;
+        interact = false;
     }
 }

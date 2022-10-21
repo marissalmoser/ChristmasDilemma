@@ -2,22 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractingBehaviour : MonoBehaviour
+public class DoorBehaviour : MonoBehaviour
 {
     bool interact;
+    public bool Key;
     SpriteRenderer sr;
+    EdgeCollider2D ec;
 
     private void Start()
     {
-        //getting sprite renderer component
+        //getting components
         sr = gameObject.GetComponent<SpriteRenderer>();
+        ec = gameObject.GetComponent<EdgeCollider2D>();
+
+        Key = false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && interact == true)
+        if (Input.GetKeyDown(KeyCode.Space) && interact && Key)
         {
             sr.enabled = !sr.enabled;
+            ec.enabled = !ec.enabled;
         }
     }
 

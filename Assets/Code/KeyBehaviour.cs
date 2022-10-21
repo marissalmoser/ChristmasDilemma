@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractingBehaviour : MonoBehaviour
+public class KeyBehaviour : MonoBehaviour
 {
     bool interact;
     SpriteRenderer sr;
+    DoorBehaviour Db;
 
     private void Start()
     {
         //getting sprite renderer component
         sr = gameObject.GetComponent<SpriteRenderer>();
+
+        //getting door behaviour script
+        GameObject Door = GameObject.Find("Door");
+        Db = Door.GetComponent<DoorBehaviour>();
     }
 
     private void Update()
@@ -18,6 +23,7 @@ public class InteractingBehaviour : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && interact == true)
         {
             sr.enabled = !sr.enabled;
+            Db.Key = true;
         }
     }
 

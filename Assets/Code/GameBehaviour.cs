@@ -69,8 +69,6 @@ public class GameBehaviour : MonoBehaviour
         {
             PresentFound();
         }
-
-        //destroy investigating script
     }
 
     public void PresentFound()
