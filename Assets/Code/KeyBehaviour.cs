@@ -14,13 +14,13 @@ public class KeyBehaviour : MonoBehaviour
         sr = gameObject.GetComponent<SpriteRenderer>();
 
         //getting door behaviour script
-        GameObject Door = GameObject.Find("Door");
+        GameObject Door = GameObject.FindGameObjectWithTag("Door");
         Db = Door.GetComponent<DoorBehaviour>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && interact == true)
+        if (Input.GetKeyDown(KeyCode.Space) && interact)
         {
             sr.enabled = !sr.enabled;
             Db.Key = true;

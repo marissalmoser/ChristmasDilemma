@@ -10,13 +10,13 @@ public class MainMenuBehaviour : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    void Update()
-    {
-        
-    }
-
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

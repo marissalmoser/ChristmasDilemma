@@ -52,12 +52,21 @@ public class GameBehaviour : MonoBehaviour
         if (Pmb.PresentMeter.value == Pmb.PresentMeter.maxValue)
         {
             WinText.SetActive(true);
+
+            Invoke("NextLevel", 3);
+  
         }
 
         if (Hmb.HazardMeter.value == Hmb.HazardMeter.maxValue)
         {
             LoseText.SetActive(true);
         }
+    }
+
+    void NextLevel()
+    {
+        WinText.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void PresentCheck()
