@@ -8,6 +8,8 @@ public class KeyBehaviour : MonoBehaviour
     SpriteRenderer sr;
     DoorBehaviour Db;
 
+    public GameObject KeyText;
+
     private void Start()
     {
         //getting sprite renderer component
@@ -24,7 +26,14 @@ public class KeyBehaviour : MonoBehaviour
         {
             sr.enabled = !sr.enabled;
             Db.Key = true;
+            KeyText.SetActive(true);
+            Invoke("KeyTextOff", 3);
         }
+    }
+
+    void KeyTextOff()
+    {
+        KeyText.SetActive(false);
     }
 
     //check if player is by the object
