@@ -20,7 +20,7 @@ public class DoorBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && interact && Key)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && interact && Key)
         {
             sr.enabled = !sr.enabled;
             ec.enabled = !ec.enabled;

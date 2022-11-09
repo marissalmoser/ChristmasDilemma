@@ -15,7 +15,7 @@ public class InteractingBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && interact == true)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && interact == true)
         {
             sr.enabled = !sr.enabled;
         }

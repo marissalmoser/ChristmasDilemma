@@ -22,7 +22,7 @@ public class HazardsBehaviour : MonoBehaviour
     //Investigate: If player is by the object and E is pressed
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && interact == true)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && interact == true)
         {
             Destroy(gameObject);
             Hmb.HazardInc();

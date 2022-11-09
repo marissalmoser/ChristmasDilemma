@@ -10,19 +10,21 @@ public class GameBehaviour : MonoBehaviour
 
     public GameObject Player;
     PlayerBehaviour Pb;
-    Animator Anim;
-    PresentMeterBehaviour Pmb;
-    HazardMeterBehaviour Hmb;
+    Animator anim;
+    public PresentMeterBehaviour Pmb;
+    public HazardMeterBehaviour Hmb;
 
     public GameObject WinText;
     public GameObject LoseText;
+
+    public bool Fireplace;
 
     void Start()
     {
         //Accessing the player and its components
         GameObject Player = GameObject.Find("Player");
         Pb = Player.GetComponent<PlayerBehaviour>();
-        Anim = Player.GetComponent<Animator>();
+        anim = Player.GetComponent<Animator>();
 
         //Getting present meter script
         GameObject PresentMeter = GameObject.Find("PresentFill");
@@ -49,7 +51,7 @@ public class GameBehaviour : MonoBehaviour
         }
 
         //winning and losing
-        if (Pmb.PresentMeter.value == Pmb.PresentMeter.maxValue)
+        if (Pmb.PresentMeter.value == Pmb.PresentMeter.maxValue && Fireplace)
         {
             WinText.SetActive(true);
 
@@ -82,9 +84,18 @@ public class GameBehaviour : MonoBehaviour
 
     public void PresentFound()
     {
-        Anim.SetTrigger("Spin");
+        anim.SetTrigger("Spin");
         Pmb.PresentInc();
         //play sound
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Fireplace = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Fireplace = false;
+    }
 }

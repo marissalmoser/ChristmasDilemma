@@ -9,8 +9,10 @@ public class PresentCheckBehaviour : MonoBehaviour
 
     public bool Interact;
     public bool HasInvestigated;
+    public bool HasPresent;
 
     GameBehaviour Gb;
+    public GameObject Lm;
 
     private void Start()
     {
@@ -24,13 +26,17 @@ public class PresentCheckBehaviour : MonoBehaviour
         GameObject GameObject = GameObject.Find("GameObject");
         Gb = GameObject.GetComponent<GameBehaviour>();
 
+        //getting the leve manager script
+        GameObject LevelManage = GameObject.Find("LevelManage");
+        Lm = LevelManage.GetComponent<LevelManager>();
+
         HasInvestigated = false;
     }
 
     //If player is by the object and E is pressed
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Interact == true)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && Interact == true)
         {
             sr.enabled = !sr.enabled;
 

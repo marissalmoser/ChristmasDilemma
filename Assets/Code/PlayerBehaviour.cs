@@ -14,12 +14,16 @@ public class PlayerBehaviour : MonoBehaviour
 
     public bool HasLanded;
 
+    public GameObject Platforms;
+
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
 
         HasLanded = true;
+
+        GameObject Platforms = GameObject.Find("Platforms");
     }
 
     void Update()
@@ -39,7 +43,7 @@ public class PlayerBehaviour : MonoBehaviour
             Anim.SetBool("Walk", false);
         }
 
-        if (HasLanded && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
+        if (HasLanded && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
         {
             //jump
             rb2D.AddForce(jumpForce);
@@ -49,12 +53,23 @@ public class PlayerBehaviour : MonoBehaviour
         //Alter gravity when falling
         if(rb2D.velocity.y < -0)
         {
-            rb2D.gravityScale = 15;
+            rb2D.gravityScale = 10;
         }
 
         if(rb2D.velocity.y == 0)
         {
             rb2D.gravityScale = 1;
+        }
+
+        //platform behavior
+        if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+        {
+            Platforms.SetActive(false);
+        }
+
+        if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+        {
+            Platforms.SetActive(true);
         }
     }
 }
