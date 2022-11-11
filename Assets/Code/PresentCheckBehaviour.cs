@@ -8,11 +8,10 @@ public class PresentCheckBehaviour : MonoBehaviour
     InteractingBehaviour ibc;
 
     public bool Interact;
-    public bool HasInvestigated;
     public bool HasPresent;
 
     GameBehaviour Gb;
-    public GameObject Lm;
+    public LevelManager Lm;
 
     private void Start()
     {
@@ -26,24 +25,23 @@ public class PresentCheckBehaviour : MonoBehaviour
         GameObject GameObject = GameObject.Find("GameObject");
         Gb = GameObject.GetComponent<GameBehaviour>();
 
-        //getting the leve manager script
-        GameObject LevelManage = GameObject.Find("LevelManage");
-        Lm = LevelManage.GetComponent<LevelManager>();
-
-        HasInvestigated = false;
+        //getting the level manager script
+        GameObject LevelBuilder = GameObject.Find("LevelBuilder");
+        Lm = LevelBuilder.GetComponent<LevelManager>();
     }
 
-    //If player is by the object and E is pressed
+    //If player is by the object and mouse is clicked
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && Interact == true)
         {
             sr.enabled = !sr.enabled;
+            Debug.Log("sp check");
 
-            if (HasInvestigated == false)
+            if (HasPresent == true)
             {
-                Gb.PresentCheck();
-                HasInvestigated = true;
+                Debug.Log("if has present is true check");
+                Gb.PresentFound();
                 ibc.enabled = true;
                 Destroy(this);
             }
@@ -59,6 +57,5 @@ public class PresentCheckBehaviour : MonoBehaviour
     void OnTriggerExit2D(Collider2D target)
     {
         Interact = false;
-        HasInvestigated = false;
     }
 }

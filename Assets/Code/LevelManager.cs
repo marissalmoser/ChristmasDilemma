@@ -8,18 +8,10 @@ public class LevelManager : MonoBehaviour
     public int TotalPresents;
     public List<PresentCheckBehaviour> SelectedLocations;
 
-    public bool HasPresent;
 
-    // Start is called before the first frame update
     void Start()
     {
         HidePresents();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void HidePresents()

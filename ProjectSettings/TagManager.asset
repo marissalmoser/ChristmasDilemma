@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cabinet
   - Door
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
@@ -49,7 +50,7 @@ TagManager:
   - name: BackgroundActiveState
     uniqueID: 3143835471
     locked: 0
-  - name: Presents
+  - name: Player
     uniqueID: 1067059049
     locked: 0
   - name: Forground

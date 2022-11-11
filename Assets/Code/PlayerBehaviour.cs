@@ -7,69 +7,73 @@ public class PlayerBehaviour : MonoBehaviour
     public Vector2 jumpForce = new Vector2();
 
     Rigidbody2D rb2D;
-    Animator Anim;
+    Animator anim;
 
     public float MoveSpeed;
     float moveHorizontal;
 
     public bool HasLanded;
-
-    public GameObject Platforms;
+    public LayerMask GroundLayer;
+    public float PlayerHeight;
 
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        Anim = GetComponent<Animator>();
-
-        HasLanded = true;
-
-        GameObject Platforms = GameObject.Find("Platforms");
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        //check if moving
+        //walking behaviour
         moveHorizontal = Input.GetAxisRaw("Horizontal");
 
-        if (moveHorizontal < 0f || moveHorizontal > 0f)
+        if (moveHorizontal < 0f)
         {
-            //move horizontally
+            //move left
             rb2D.AddForce(new Vector2(moveHorizontal * MoveSpeed * Time.deltaTime, 0f));
-            Anim.SetBool("Walk",true);
+            anim.SetBool("Walk Left",true);
         }
-
+        if (moveHorizontal > 0f)
+        {
+            //move right
+            rb2D.AddForce(new Vector2(moveHorizontal * MoveSpeed * Time.deltaTime, 0f));
+            anim.SetBool("Walk Right", true);
+        }
         if (moveHorizontal == 0)
         {
-            Anim.SetBool("Walk", false);
+            anim.SetBool("Walk Right", false);
+            anim.SetBool("Walk Left", false);
         }
 
+        //jump behaviour
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, PlayerHeight, GroundLayer);
+        if (hit == true)
+        {
+            HasLanded = true;
+        }
+        else
+        {
+            HasLanded = false;
+            anim.SetBool("Jump", false);
+        }
         if (HasLanded && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
         {
             //jump
             rb2D.AddForce(jumpForce);
-            HasLanded = false;
+            anim.SetBool("Jump", true);
         }
 
         //Alter gravity when falling
         if(rb2D.velocity.y < -0)
         {
             rb2D.gravityScale = 10;
+            anim.SetBool("Fall", true);
         }
 
         if(rb2D.velocity.y == 0)
         {
             rb2D.gravityScale = 1;
-        }
-
-        //platform behavior
-        if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
-        {
-            Platforms.SetActive(false);
-        }
-
-        if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
-        {
-            Platforms.SetActive(true);
+            anim.SetBool("False", true);
         }
     }
 }

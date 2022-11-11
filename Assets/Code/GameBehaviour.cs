@@ -71,24 +71,15 @@ public class GameBehaviour : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void PresentCheck()
-    {
-        //random number to establish Luck
-        Luck = Random.Range(1, MaxLuck);
-
-        if(Luck > 1)
-        {
-            PresentFound();
-        }
-    }
-
     public void PresentFound()
     {
-        anim.SetTrigger("Spin");
+        Debug.Log("Present found ran");
+        anim.SetTrigger("Present");
         Pmb.PresentInc();
         //play sound
     }
 
+    //return to fireplace to win
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Fireplace = true;
