@@ -10,8 +10,7 @@ public class PresentCheckBehaviour : MonoBehaviour
     public bool Interact;
     public bool HasPresent;
 
-    GameBehaviour Gb;
-    public LevelManager Lm;
+    GameBehaviour gb;
 
     private void Start()
     {
@@ -23,11 +22,7 @@ public class PresentCheckBehaviour : MonoBehaviour
 
         //getting the player behaviour script
         GameObject GameObject = GameObject.Find("GameObject");
-        Gb = GameObject.GetComponent<GameBehaviour>();
-
-        //getting the level manager script
-        GameObject LevelBuilder = GameObject.Find("LevelBuilder");
-        Lm = LevelBuilder.GetComponent<LevelManager>();
+        gb = GameObject.GetComponent<GameBehaviour>();
     }
 
     //If player is by the object and mouse is clicked
@@ -41,7 +36,7 @@ public class PresentCheckBehaviour : MonoBehaviour
             if (HasPresent == true)
             {
                 Debug.Log("if has present is true check");
-                Gb.PresentFound();
+                gb.PresentFound();
                 ibc.enabled = true;
                 Destroy(this);
             }

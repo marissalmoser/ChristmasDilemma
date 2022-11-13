@@ -6,24 +6,25 @@ public class MilkNCookiesBehaviour : MonoBehaviour
 {
     private bool interact;
 
-    HazardMeterBehaviour Hmb;
+    HazardMeterBehaviour hmb;
 
     private void Start()
     {
         //getting the HazardMeterBehaviour script
         GameObject HazardMeter = GameObject.Find("HazardFill");
-        Hmb = HazardMeter.GetComponent<HazardMeterBehaviour>();
-        Hmb.MnC = false;
+        hmb = HazardMeter.GetComponent<HazardMeterBehaviour>();
+        hmb.MnC = false;
     }
 
     //If player is by the object and E is pressed
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && interact == true)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && interact == true)
         {
-            Hmb.MnC = true;
+            hmb.MnC = true;
             Destroy(gameObject);
-            //play sound
+            //play eating sound
+            //symbol for milk and cookies enabled
         }
     }
 

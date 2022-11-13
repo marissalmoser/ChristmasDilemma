@@ -64,16 +64,15 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         //Alter gravity when falling
-        if(rb2D.velocity.y < -0)
+        if(rb2D.velocity.y < -0.1f)
         {
             rb2D.gravityScale = 10;
             anim.SetBool("Fall", true);
         }
-
         if(rb2D.velocity.y == 0)
         {
             rb2D.gravityScale = 1;
-            anim.SetBool("False", true);
+            anim.SetBool("Fall", false);
         }
     }
 }

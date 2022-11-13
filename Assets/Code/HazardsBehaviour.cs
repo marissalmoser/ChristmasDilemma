@@ -6,17 +6,12 @@ public class HazardsBehaviour : MonoBehaviour
 {
     public bool interact;
 
-    GameBehaviour Gb;
-    HazardMeterBehaviour Hmb;
+    HazardMeterBehaviour hmb;
 
     private void Start()
     {
-        //getting the player behaviour script
-        GameObject GameObject = GameObject.Find("GameObject");
-        Gb = GameObject.GetComponent<GameBehaviour>();
-
         GameObject HazardMeter = GameObject.Find("HazardFill");
-        Hmb = HazardMeter.GetComponent<HazardMeterBehaviour>();
+        hmb = HazardMeter.GetComponent<HazardMeterBehaviour>();
     }
 
     //Investigate: If player is by the object and E is pressed
@@ -25,8 +20,7 @@ public class HazardsBehaviour : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && interact == true)
         {
             Destroy(gameObject);
-            Hmb.HazardInc();
-            //play sound
+            hmb.HazardInc();
         }
     }
 

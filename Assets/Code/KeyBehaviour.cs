@@ -6,7 +6,7 @@ public class KeyBehaviour : MonoBehaviour
 {
     bool interact;
     SpriteRenderer sr;
-    DoorBehaviour Db;
+    DoorBehaviour db;
 
     public GameObject KeyText;
 
@@ -17,15 +17,15 @@ public class KeyBehaviour : MonoBehaviour
 
         //getting door behaviour script
         GameObject Door = GameObject.FindGameObjectWithTag("Door");
-        Db = Door.GetComponent<DoorBehaviour>();
+        db = Door.GetComponent<DoorBehaviour>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && interact)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && interact)
         {
             sr.enabled = !sr.enabled;
-            Db.Key = true;
+            db.Key = true;
             KeyText.SetActive(true);
             Invoke("KeyTextOff", 3);
         }
