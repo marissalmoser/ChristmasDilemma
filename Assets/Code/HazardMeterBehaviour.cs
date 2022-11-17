@@ -11,6 +11,7 @@ public class HazardMeterBehaviour : MonoBehaviour
 
     public bool MnC;
 
+    public GameObject MnCSymbol;
 
     Animator anim;
 
@@ -46,7 +47,7 @@ public class HazardMeterBehaviour : MonoBehaviour
         {
             MnC = false;
             //relief sound effect
-            //symbol for milk and cookies disabled
+            MnCSymbol.SetActive(false);
         }
     }
 

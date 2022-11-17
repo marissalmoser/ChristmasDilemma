@@ -8,6 +8,8 @@ public class MilkNCookiesBehaviour : MonoBehaviour
 
     HazardMeterBehaviour hmb;
 
+    //public GameObject MnCText;
+
     private void Start()
     {
         //getting the HazardMeterBehaviour script
@@ -24,9 +26,16 @@ public class MilkNCookiesBehaviour : MonoBehaviour
             hmb.MnC = true;
             Destroy(gameObject);
             //play eating sound
-            //symbol for milk and cookies enabled
+            hmb.MnCSymbol.SetActive(true);
+            //MnCText.SetActive(true);
+            //Invoke("MnCTextOff", 3f);
         }
     }
+
+    //void MnCTextOff()
+    //{
+    //    MnCText.SetActive(false);
+    //}
 
     //check if player is by the object
     void OnTriggerEnter2D(Collider2D target)

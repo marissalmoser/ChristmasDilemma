@@ -6,29 +6,43 @@ public class KeyBehaviour : MonoBehaviour
 {
     bool interact;
     SpriteRenderer sr;
-    DoorBehaviour db;
 
     public GameObject KeyText;
+    public GameObject KeySymbol;
+
+    public bool Key;
 
     private void Start()
     {
         //getting sprite renderer component
         sr = gameObject.GetComponent<SpriteRenderer>();
 
-        //getting door behaviour script
-        GameObject Door = GameObject.FindGameObjectWithTag("Door");
-        db = Door.GetComponent<DoorBehaviour>();
+        Key = false;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && interact)
         {
-            sr.enabled = !sr.enabled;
-            db.Key = true;
-            KeyText.SetActive(true);
-            Invoke("KeyTextOff", 3);
+            KeyFound();
         }
+
+        if(Key)
+        {
+            KeySymbol.SetActive(true);
+        }
+        else
+        {
+            KeySymbol.SetActive(false);
+        }
+    }
+
+    void KeyFound()
+    {
+        sr.enabled = !sr.enabled;
+        Key = true;
+        KeyText.SetActive(true);
+        Invoke("KeyTextOff", 3);
     }
 
     void KeyTextOff()

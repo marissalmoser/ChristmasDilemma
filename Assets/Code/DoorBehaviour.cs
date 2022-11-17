@@ -5,25 +5,20 @@ using UnityEngine;
 public class DoorBehaviour : MonoBehaviour
 {
     bool interact;
-    public bool Key;
-    SpriteRenderer sr;
-    EdgeCollider2D ec;
+    KeyBehaviour kb;
 
     private void Start()
     {
-        //getting components
-        sr = gameObject.GetComponent<SpriteRenderer>();
-        ec = gameObject.GetComponent<EdgeCollider2D>();
-
-        Key = false;
+        GameObject KeySpot = GameObject.FindGameObjectWithTag("Key");
+        kb = KeySpot.GetComponent<KeyBehaviour>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && interact && Key)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && interact && kb.Key)
         {
-            sr.enabled = !sr.enabled;
-            ec.enabled = !ec.enabled;
+            Destroy(gameObject);
+            kb.Key = false;
         }
     }
 

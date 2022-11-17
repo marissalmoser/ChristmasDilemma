@@ -7,6 +7,7 @@ TagManager:
   - Cabinet
   - Door
   - Platform
+  - Key
   layers:
   - Default
   - TransparentFX
