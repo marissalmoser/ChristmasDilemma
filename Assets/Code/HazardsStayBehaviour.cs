@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HazardsBehaviour : MonoBehaviour
+public class HazardsStayBehaviour : MonoBehaviour
 {
     public bool interact;
 
@@ -24,7 +24,6 @@ public class HazardsBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && interact == true)
         {
-            Destroy(gameObject);
             hmb.HazardInc();
             AudioSource.PlayClipAtPoint(HazardSound, campos, 0.25f);
         }

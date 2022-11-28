@@ -16,6 +16,9 @@ public class GameBehaviour : MonoBehaviour
 
     public bool Fireplace;
 
+    public AudioClip WellDoneSound;
+    private Vector2 campos;
+
     void Start()
     {
         //Accessing the player and its components
@@ -35,6 +38,8 @@ public class GameBehaviour : MonoBehaviour
 
     void Update()
     {
+        Vector2 campos = Camera.main.transform.position;
+
         if (Input.GetKey(KeyCode.Escape))
         {
             Application.Quit();
@@ -53,6 +58,7 @@ public class GameBehaviour : MonoBehaviour
         {
             WinText.SetActive(true);
             FireplaceText.SetActive(false);
+            AudioSource.PlayClipAtPoint(WellDoneSound, campos, 0.25f);
             Invoke("NextLevel", 3);
         }
 
