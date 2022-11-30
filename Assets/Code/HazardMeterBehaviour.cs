@@ -13,9 +13,6 @@ public class HazardMeterBehaviour : MonoBehaviour
 
     public GameObject MnCSymbol;
 
-    public AudioClip ReliefSound;
-    private Vector2 campos;
-
     Animator anim;
 
     private void Start()
@@ -24,11 +21,6 @@ public class HazardMeterBehaviour : MonoBehaviour
 
         GameObject Player = GameObject.Find("Player");
         anim = Player.GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        Vector2 campos = Camera.main.transform.position;
     }
 
     public void SetMaxPresents(int MaxHazards)
@@ -53,7 +45,6 @@ public class HazardMeterBehaviour : MonoBehaviour
         if (MnC == true)
         {
             MnC = false;
-            AudioSource.PlayClipAtPoint(ReliefSound, campos, 0.25f);
             MnCSymbol.SetActive(false);
         }
     }

@@ -6,6 +6,7 @@ public class PresentCheckBehaviour : MonoBehaviour
 {
     SpriteRenderer sr;
     InteractingBehaviour ibc;
+    AudioSource sound;
 
     public bool Interact;
     public bool HasPresent;
@@ -14,10 +15,9 @@ public class PresentCheckBehaviour : MonoBehaviour
 
     private void Start()
     {
-        //getting sprite renderer component
+        //getting components
         sr = gameObject.GetComponent<SpriteRenderer>();
-
-        //getting InteractingBehaviour Component
+        sound = gameObject.GetComponent<AudioSource>();
         ibc = gameObject.GetComponent<InteractingBehaviour>();
 
         //getting the player behaviour script
@@ -31,12 +31,11 @@ public class PresentCheckBehaviour : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && Interact == true)
         {
             sr.enabled = !sr.enabled;
-            Debug.Log("sp check");
 
             if (HasPresent == true)
             {
-                Debug.Log("if has present is true check");
                 gb.PresentFound();
+                sound.enabled = !sound.enabled;
                 ibc.enabled = true;
                 Destroy(this);
             }

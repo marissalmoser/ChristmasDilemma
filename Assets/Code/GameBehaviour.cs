@@ -16,9 +16,6 @@ public class GameBehaviour : MonoBehaviour
 
     public bool Fireplace;
 
-    public AudioClip WellDoneSound;
-    private Vector2 campos;
-
     void Start()
     {
         //Accessing the player and its components
@@ -58,7 +55,6 @@ public class GameBehaviour : MonoBehaviour
         {
             WinText.SetActive(true);
             FireplaceText.SetActive(false);
-            AudioSource.PlayClipAtPoint(WellDoneSound, campos, 0.25f);
             Invoke("NextLevel", 3);
         }
 
@@ -80,7 +76,6 @@ public class GameBehaviour : MonoBehaviour
         anim.SetBool("Present", true);
         Invoke("EndAnimation", 0.5f);
         Pmb.PresentInc();
-        //play sound
     }
     void EndAnimation()
     {

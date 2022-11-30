@@ -8,13 +8,14 @@ public class HazardsStayBehaviour : MonoBehaviour
 
     HazardMeterBehaviour hmb;
 
-    public AudioClip HazardSound;
-    private Vector2 campos;
+    AudioSource sound;
 
     private void Start()
     {
         GameObject HazardMeter = GameObject.Find("HazardFill");
         hmb = HazardMeter.GetComponent<HazardMeterBehaviour>();
+
+        sound = gameObject.GetComponent<AudioSource>();
     }
 
     //Investigate: If player is by the object and E is pressed
@@ -25,7 +26,8 @@ public class HazardsStayBehaviour : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && interact == true)
         {
             hmb.HazardInc();
-            AudioSource.PlayClipAtPoint(HazardSound, campos, 0.25f);
+            sound.enabled = !sound.enabled;
+            Destroy(this);
         }
     }
 
