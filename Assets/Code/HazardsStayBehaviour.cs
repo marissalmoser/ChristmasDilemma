@@ -9,6 +9,7 @@ public class HazardsStayBehaviour : MonoBehaviour
     HazardMeterBehaviour hmb;
 
     AudioSource sound;
+    ParticleSystem ps;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class HazardsStayBehaviour : MonoBehaviour
         hmb = HazardMeter.GetComponent<HazardMeterBehaviour>();
 
         sound = gameObject.GetComponent<AudioSource>();
+        ps = gameObject.GetComponent<ParticleSystem>();
     }
 
     //Investigate: If player is by the object and E is pressed
@@ -27,6 +29,8 @@ public class HazardsStayBehaviour : MonoBehaviour
         {
             hmb.HazardInc();
             sound.enabled = !sound.enabled;
+            var em = ps.emission;
+            em.enabled = false;
             Destroy(this);
         }
     }
@@ -35,10 +39,16 @@ public class HazardsStayBehaviour : MonoBehaviour
     void OnTriggerEnter2D(Collider2D target)
     {
         interact = true;
+
+        var em = ps.emission;
+        em.enabled = true;
     }
 
     void OnTriggerExit2D(Collider2D target)
     {
         interact = false;
+
+        var em = ps.emission;
+        em.enabled = false;
     }
 }

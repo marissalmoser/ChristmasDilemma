@@ -7,6 +7,7 @@ public class PresentCheckBehaviour : MonoBehaviour
     SpriteRenderer sr;
     InteractingBehaviour ibc;
     AudioSource sound;
+    ParticleSystem ps;
 
     public bool Interact;
     public bool HasPresent;
@@ -19,6 +20,7 @@ public class PresentCheckBehaviour : MonoBehaviour
         sr = gameObject.GetComponent<SpriteRenderer>();
         sound = gameObject.GetComponent<AudioSource>();
         ibc = gameObject.GetComponent<InteractingBehaviour>();
+        ps = gameObject.GetComponent<ParticleSystem>();
 
         //getting the player behaviour script
         GameObject GameObject = GameObject.Find("GameObject");
@@ -32,6 +34,9 @@ public class PresentCheckBehaviour : MonoBehaviour
         {
             sr.enabled = !sr.enabled;
 
+            var em = ps.emission;
+            em.enabled = false;
+
             if (HasPresent == true)
             {
                 gb.PresentFound();
@@ -39,17 +44,29 @@ public class PresentCheckBehaviour : MonoBehaviour
                 ibc.enabled = true;
                 Destroy(this);
             }
+
+            if (HasPresent == false)
+            {
+                ibc.enabled = true;
+                Destroy(this);
+            }
         }
     }
 
-    //check if player is by the object
+    //check if player is by the object, spawn particals
     void OnTriggerEnter2D(Collider2D target)
     {
         Interact = true;
+
+        var em = ps.emission;
+        em.enabled = true;
     }
 
     void OnTriggerExit2D(Collider2D target)
     {
         Interact = false;
+
+        var em = ps.emission;
+        em.enabled = false;
     }
 }

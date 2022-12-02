@@ -6,6 +6,7 @@ public class KeyBehaviour : MonoBehaviour
 {
     bool interact;
     SpriteRenderer sr;
+    ParticleSystem ps;
 
     public GameObject KeyText;
     public GameObject KeySymbol;
@@ -14,8 +15,9 @@ public class KeyBehaviour : MonoBehaviour
 
     private void Start()
     {
-        //getting sprite renderer component
+        //getting components
         sr = gameObject.GetComponent<SpriteRenderer>();
+        ps = gameObject.GetComponent<ParticleSystem>();
 
         Key = false;
     }
@@ -29,11 +31,22 @@ public class KeyBehaviour : MonoBehaviour
 
         if(Key)
         {
-            KeySymbol.SetActive(true);
+            if (KeySymbol != null)
+            {
+                KeySymbol.SetActive(true);
+            }
         }
         else
         {
-            KeySymbol.SetActive(false);
+            if (KeySymbol != null)
+            {
+                KeySymbol.SetActive(false);
+            }
+        }
+
+        if(Key && !interact)
+        {
+            Destroy(ps);
         }
     }
 
@@ -41,23 +54,43 @@ public class KeyBehaviour : MonoBehaviour
     {
         sr.enabled = !sr.enabled;
         Key = true;
-        KeyText.SetActive(true);
+        if (ps != null)
+        {
+            KeyText.SetActive(true);
+        }
         Invoke("KeyTextOff", 3);
+        if (ps != null)
+        {
+            var em = ps.emission;
+            em.enabled = false;
+        }
     }
 
     void KeyTextOff()
     {
-        KeyText.SetActive(false);
+        Destroy(KeyText);
     }
 
     //check if player is by the object
     void OnTriggerEnter2D(Collider2D target)
     {
         interact = true;
+
+        if(ps != null)
+        {
+            var em = ps.emission;
+            em.enabled = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D target)
     {
         interact = false;
+
+        if (ps != null)
+        {
+            var em = ps.emission;
+            em.enabled = false;
+        }
     }
 }

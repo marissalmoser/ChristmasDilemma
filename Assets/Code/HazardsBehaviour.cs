@@ -10,6 +10,7 @@ public class HazardsBehaviour : MonoBehaviour
 
     AudioSource sound;
     SpriteRenderer sr;
+    ParticleSystem ps;
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class HazardsBehaviour : MonoBehaviour
 
         sound = gameObject.GetComponent<AudioSource>();
         sr = gameObject.GetComponent<SpriteRenderer>();
+        ps = gameObject.GetComponent<ParticleSystem>();
     }
 
     //Investigate: If player is by the object and E is pressed
@@ -30,6 +32,8 @@ public class HazardsBehaviour : MonoBehaviour
             hmb.HazardInc();
             sound.enabled = !sound.enabled;
             sr.enabled = !sr.enabled;
+            var em = ps.emission;
+            em.enabled = false;
             Destroy(this);
         }
     }
@@ -38,10 +42,16 @@ public class HazardsBehaviour : MonoBehaviour
     void OnTriggerEnter2D(Collider2D target)
     {
         interact = true;
+
+        var em = ps.emission;
+        em.enabled = true;
     }
 
     void OnTriggerExit2D(Collider2D target)
     {
         interact = false;
+
+        var em = ps.emission;
+        em.enabled = false;
     }
 }

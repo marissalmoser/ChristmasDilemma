@@ -19,6 +19,7 @@ public class DoorBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
             kb.Key = false;
+            Destroy(kb.KeySymbol);
         }
     }
 
