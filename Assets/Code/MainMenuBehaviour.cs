@@ -20,7 +20,7 @@ public class MainMenuBehaviour : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    private void ExitGame()
+    public void ExitGame()
     {
         Application.Quit();
     }

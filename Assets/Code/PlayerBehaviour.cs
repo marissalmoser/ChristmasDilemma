@@ -50,12 +50,15 @@ public class PlayerBehaviour : MonoBehaviour
         if (hit == true)
         {
             HasLanded = true;
+            anim.SetBool("Jump", false);
+            anim.SetBool("Fall", false);
+            rb2D.gravityScale = 1;
         }
         else
         {
             HasLanded = false;
-            anim.SetBool("Jump", false);
         }
+
         if (HasLanded && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
         {
             //jump
@@ -64,12 +67,12 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         //Alter gravity when falling
-        if(rb2D.velocity.y < -0.3f)
+        if(rb2D.velocity.y < -0.1f)
         {
             rb2D.gravityScale = 15;
             anim.SetBool("Fall", true);
         }
-        if(rb2D.velocity.y == 0)
+        if(rb2D.velocity.y == 0)// || HasLanded)
         {
             rb2D.gravityScale = 1;
             anim.SetBool("Fall", false);

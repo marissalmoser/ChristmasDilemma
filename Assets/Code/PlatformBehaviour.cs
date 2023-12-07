@@ -16,16 +16,16 @@ public class PlatformBehaviour : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.S) ||Input.GetKeyUp(KeyCode.DownArrow))
         {
-            WaitTime = 1f;
+            WaitTime = 0.5f;
             effector.rotationalOffset = 0;
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            if(WaitTime <= 0.9)
+            if(WaitTime <= 0.4)
             {
                 effector.rotationalOffset = 180f;
-                WaitTime = 1f;
+                WaitTime = 0.5f;
             }
             else
             {
