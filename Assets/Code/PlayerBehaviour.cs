@@ -1,14 +1,3 @@
-/**********************************************************************************
-
-// File Name :         Assignment2.cs
-// Author :            Marissa Moser
-// Creation Date :     January 31, 2023
-//
-// Brief Description : Code for Assignment2, reversing an integer using modulos and
-                          converting a distance from miles to kilometers.
-
-**********************************************************************************/
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -75,9 +64,9 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         //Alter gravity when falling
-        if(rb2D.velocity.y < -0.1f)
+        if(rb2D.velocity.y < -0.3f)
         {
-            rb2D.gravityScale = 10;
+            rb2D.gravityScale = 15;
             anim.SetBool("Fall", true);
         }
         if(rb2D.velocity.y == 0)
